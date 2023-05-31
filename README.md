@@ -30,11 +30,11 @@ cd /tmp
 
 wget https://github.com/ComplianceAsCode/content/releases/download/v0.1.67/scap-security-guide-0.1.67.zip
 
-unzip scap-security-guide-0.1.67.zip -d scap-security-guide
+unzip scap-security-guide-0.1.67.zip
 
 # Pass the Bench – Generate a report
 
-oscap xccdf eval -- report report.html --profile xccdf_org.ssgproject.content_profile_cis_level1_server  scap-security-guide/ssg-ubuntu2204-ds.xml --results scan-xccdf-results.xml
+oscap xccdf eval --report report.html --profile xccdf_org.ssgproject.content_profile_cis_level1_server scap-security-guide-0.1.67/ssg-ubuntu2204-ds.xml --results scan-xccdf-results.xml
 
 # Remediate after reporting
 
@@ -42,7 +42,7 @@ oscap xccdf remediate --results scan-xccdf-results.xml scan-xccdf-results.xml
 
 # Generate a script for later remediation 
 
-oscap xccdf generate fix --template urn:xccdf:fix:script:sh --profile xccdf_org.ssgproject.content_profile_cis_level1_server --output my-remediation-script.sh scap-security-guide/ssg-ubuntu2204-ds.xml
+oscap xccdf generate fix --template urn:xccdf:fix:script:sh --profile xccdf_org.ssgproject.content_profile_cis_level1_server --output my-remediation-script.sh scap-security-guide-0.1.67/ssg-ubuntu2204-ds.xml
 
 # Vulnerabilities Scan (OVAL)
 
@@ -60,9 +60,14 @@ oscap oval eval --report report.html com.ubuntu.$(lsb_release -cs).usn.oval.xml
 
 sudo apt install openscap-utils
 
+sudo apt install python3-openscap
+
+sudo apt install openscap-scanner
+
 # Doc : 
 https://manpages.ubuntu.com/manpages/lunar/man8/oscap-docker.8.html
 
 oscap-docker image-cve IMAGE_NAME --results oval-results-file.xml --report report.html
+
 oscap-docker container-cve CONTAINER_NAME --results oval-results-file.xml --report report.html
 
