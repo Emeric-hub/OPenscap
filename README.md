@@ -54,3 +54,15 @@ bunzip2 com.ubuntu.$(lsb_release -cs).usn.oval.xml.bz2
 
 oscap oval eval --report report.html com.ubuntu.$(lsb_release -cs).usn.oval.xml
 
+# Docker Image Scanning
+
+#Add extra scanner
+
+sudo apt install openscap-utils
+
+# Doc : 
+https://manpages.ubuntu.com/manpages/lunar/man8/oscap-docker.8.html
+
+oscap-docker image-cve IMAGE_NAME --results oval-results-file.xml --report report.html
+oscap-docker container-cve CONTAINER_NAME --results oval-results-file.xml --report report.html
+
