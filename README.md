@@ -32,6 +32,10 @@ wget https://github.com/ComplianceAsCode/content/releases/download/v0.1.67/scap-
 
 unzip scap-security-guide-0.1.67.zip
 
+#List vailable profiles
+oscap info "/usr/share/xml/scap/ssg/content/ssg-rhel6-xccdf.xml"
+
+
 # Pass the Bench – Generate a report
 
 oscap xccdf eval --report report.html --profile xccdf_org.ssgproject.content_profile_cis_level1_server scap-security-guide-0.1.67/ssg-ubuntu2204-ds.xml --results scan-xccdf-results.xml
