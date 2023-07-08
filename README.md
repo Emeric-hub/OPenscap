@@ -75,3 +75,20 @@ oscap-docker image-cve IMAGE_NAME --results oval-results-file.xml --report repor
 
 oscap-docker container-cve CONTAINER_NAME --results oval-results-file.xml --report report.html
 
+# Dirty Debian 11 Version 
+
+wget http://ftp.us.debian.org/debian/pool/main/o/openscap/libopenscap8_1.3.4-1_amd64.deb
+wget http://ftp.us.debian.org/debian/pool/main/s/scap-security-guide/ssg-base_0.1.62-2_all.deb
+wget http://ftp.us.debian.org/debian/pool/main/s/scap-security-guide/ssg-debian_0.1.62-2_all.deb
+
+# Test for missing dependecies
+apt -s install ./libopenscap8_1.3.4-1_amd64.deb
+apt install -s ./ssg-base_0.1.62-2_all.deb
+apt install -s ./ssg-debian_0.1.62-2_all.deb
+
+# Install if everythin is ok
+apt install ./libopenscap8_1.3.4-1_amd64.deb
+apt install ./ssg-base_0.1.62-2_all.deb
+apt install ./ssg-debian_0.1.62-2_all.deb
+
+
